@@ -2,6 +2,7 @@ package com.kyotom.ditto.parser;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Injector;
+import com.kyotom.ditto.client.ClientModule;
 import com.kyotom.ditto.parser.bridging.Bridging;
 import com.kyotom.ditto.parser.tree.Statement;
 import com.kyotom.ditto.parser.tree.Statements;
@@ -10,6 +11,8 @@ import io.trino.sql.SqlFormatter;
 import com.google.inject.Module;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Properties;
 
 public class SqlParserTest {
 
@@ -21,8 +24,10 @@ public class SqlParserTest {
 
     @Before
     public void init(){
+        System.getProperties().put("config","etc/config.properties");
         ImmutableList.Builder<Module> modules = ImmutableList.builder();
         modules.add(
+                new ClientModule(),
                 new ParserModule());
 
         Bootstrap app = new Bootstrap(modules.build());
