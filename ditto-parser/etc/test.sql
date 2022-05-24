@@ -1,0 +1,1 @@
+create table b.a(b bigint primary key,k varchar,name varchar(16),money decimal(4,8)) stored as orc location 'hdfs://abcsa' TBLPROPERTIES ('a'='1','b'='2');
